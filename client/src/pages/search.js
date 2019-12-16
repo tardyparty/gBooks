@@ -3,8 +3,9 @@ import API from "../utils/API";
 import { Link } from "react-router-dom";
 import Jumbo from "../components/Jumbo"
 import { Container } from "react-bootstrap";
+import Search from "../components/search";
 
-export default class Search extends Component {
+export default class SearchCom extends Component {
 
   state = {
 
@@ -15,7 +16,7 @@ export default class Search extends Component {
       <div>
         <Jumbo/>
         <Container>
-          {}
+          <Search />
         </Container>
       </div>
     )
