@@ -9,6 +9,10 @@ export default class Mybooks extends Component {
 
   }
 
+  // 1. componentDidMount calls API.getBooks()
+  // 2. X button to delete book from DB => API.deleteBook()
+  // 3. details button to view the book on its own
+
   render() {
     return(
       <Jumbo/>
