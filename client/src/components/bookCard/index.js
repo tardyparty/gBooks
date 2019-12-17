@@ -1,16 +1,17 @@
 import React, { Component } from "react";
 import { Card, Row, Col, Button } from "react-bootstrap";
-import API from "../../utils/API";
+import SaveBtn from "../saveBtn";
 import "./style.css";
 
 
 function BookCard(props) {
+
   return(
     <Card border="dark" className="myCard">
       <Card.Title>
         <Col>
           <p className="cardTitle"> { props.title } </p> 
-
+          
         </Col>
         <Col>
           <p className="author"> { props.authors } </p>
@@ -23,7 +24,7 @@ function BookCard(props) {
         </Row>
         <Row>
           <a className="myButton" href={props.link} target="_blank"><Button variant="dark">Details</Button></a>
-          <Button className="myButton" variant="dark">Save Book</Button>
+          <SaveBtn data={props}/>
         </Row>
       </Card.Body>
     </Card>

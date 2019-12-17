@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import API from "../utils/API";
 import { Link } from "react-router-dom";
 import Jumbo from "../components/Jumbo"
-import { Container, Form, Button, Card } from "react-bootstrap";
+import { Container, Form, Button } from "react-bootstrap";
 import axios from "axios";
-import Wrapper from "../components/Wrapper";
 import BookCard from "../components/bookCard"
 
 export default class SearchCom extends Component {
