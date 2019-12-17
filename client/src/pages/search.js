@@ -2,12 +2,16 @@ import React, { Component } from "react";
 import API from "../utils/API";
 import { Link } from "react-router-dom";
 import Jumbo from "../components/Jumbo"
-import { Container, Form, Button } from "react-bootstrap";
+import { Container, Form, Button, Card } from "react-bootstrap";
 import axios from "axios";
+import Wrapper from "../components/Wrapper";
+import BookCard from "../components/bookCard"
 
 export default class SearchCom extends Component {
-
-  state = {
+constructor(props){
+  super(props)
+  this.state = {
+    books: [],
     searchTerm: "",
     title: "",
     authors: "",
@@ -15,11 +19,12 @@ export default class SearchCom extends Component {
     image: "",
     link: ""
   }
+}
 
   // 1. fix api call to google books
   // 2. display each book from API call as a card
   // 3. onClick of save button => API.saveBook() 
-  
+
 
   handleInputChange = event => {
     
@@ -30,12 +35,28 @@ export default class SearchCom extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
 
+    this.setState({ books: [] })
+
     axios
-      .get("http://www.googleapis.com/books/v1/volumes?q=" + this.state.searchTerm + "&key=AIzaSyBUyIx7bDmHsfjsBUhwi4wj_gj9amMJKdk")
+      .get("https://www.googleapis.com/books/v1/volumes?q=" + this.state.searchTerm + "&key=AIzaSyBUyIx7bDmHsfjsBUhwi4wj_gj9amMJKdk")
       .then((data) => {
-        console.log(data)
+         console.log(data)
+         let theseBooks = [];
+         data.data.items.map( item => {
+          theseBooks.push({
+            key: item.volumeInfo.title,
+            title: item.volumeInfo.title,
+            authors: item.volumeInfo.authors,
+            description: item.volumeInfo.description,
+            image: item.volumeInfo.imageLinks.thumbnail,
+            link: item.volumeInfo.infoLink
+          })
+
+        })
+        console.log(theseBooks);
+        this.setState({ books: theseBooks })
       })
-      .catch( err => console.log(err))
+      // .catch( err => console.log(err))
   }
 
   render() {
@@ -51,6 +72,22 @@ export default class SearchCom extends Component {
             Search
           </Button>
         </Form>
+        
+        <Container>
+          {console.log(this.state.books)}
+          { this.state.books.map( book => {
+            return(
+              <BookCard 
+                key={book.key}
+                title={book.title} 
+                authors={book.authors} 
+                image={book.image}
+                description={book.description}
+                link={book.link}
+              />
+              )
+            })}
+        </Container>
         </Container>
       </div>
     )
