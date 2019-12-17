@@ -7,21 +7,19 @@ import axios from "axios";
 import BookCard from "../components/bookCard"
 
 export default class SearchCom extends Component {
-constructor(props){
-  super(props)
-  this.state = {
-    books: [],
-    searchTerm: "",
-    title: "",
-    authors: "",
-    description: "",
-    image: "",
-    link: ""
+  constructor(props){
+    super(props)
+    this.state = {
+      books: [],
+      searchTerm: "",
+      title: "",
+      authors: "",
+      description: "",
+      image: "",
+      link: ""
+    }
   }
-}
 
-  // 1. fix api call to google books
-  // 2. display each book from API call as a card
   // 3. onClick of save button => API.saveBook() 
 
 
