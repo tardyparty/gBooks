@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import API from "../utils/API";
-import { Link } from "react-router-dom";
-import Jumbo from "../components/Jumbo"
+import Jumbo from "../components/Jumbo";
+import Header from "../components/Nav";
 import { Container, Form, Button } from "react-bootstrap";
 import axios from "axios";
 import BookCard from "../components/bookCard"
@@ -20,7 +19,7 @@ export default class SearchCom extends Component {
     }
   }
 
-  // 3. onClick of save button => API.saveBook() 
+  // 3. onClick of save button => API.saveBook() ***** still getting 404 not found error
 
 
   handleInputChange = event => {
@@ -37,8 +36,8 @@ export default class SearchCom extends Component {
     axios
       .get("https://www.googleapis.com/books/v1/volumes?q=" + this.state.searchTerm + "&key=AIzaSyBUyIx7bDmHsfjsBUhwi4wj_gj9amMJKdk")
       .then((data) => {
-         console.log(data)
          let theseBooks = [];
+
          data.data.items.map( item => {
           theseBooks.push({
             key: item.volumeInfo.title,
@@ -48,17 +47,16 @@ export default class SearchCom extends Component {
             image: item.volumeInfo.imageLinks.thumbnail,
             link: item.volumeInfo.infoLink
           })
-
         })
-        console.log(theseBooks);
         this.setState({ books: theseBooks })
       })
-      // .catch( err => console.log(err))
+      .catch( err => console.log(err))
   }
 
   render() {
     return(
-      <div>
+      <Container>
+        <Header />
         <Jumbo/>
         <Container>
         <Form>
@@ -86,7 +84,7 @@ export default class SearchCom extends Component {
             })}
         </Container>
         </Container>
-      </div>
+      </Container>
     )
   }
 }

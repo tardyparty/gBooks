@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Card, Row, Col, Button } from "react-bootstrap";
 import SaveBtn from "../saveBtn";
 import "./style.css";
@@ -19,11 +19,11 @@ function BookCard(props) {
       </Card.Title>
       <Card.Body>
         <Row>
-          <img className="col-md-2 myImg" src={props.image} />
+          <img className="col-md-2 myImg" src={props.image} alt={props.title} />
           <p className="col-md-10"> { props.description } </p>
         </Row>
         <Row>
-          <a className="myButton" href={props.link} target="_blank"><Button variant="dark">Details</Button></a>
+          <a className="myButton" href={props.link} target="_blank" rel="noopener noreferrer"><Button variant="dark">Details</Button></a>
           <SaveBtn data={props}/>
         </Row>
       </Card.Body>
