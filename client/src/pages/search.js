@@ -11,11 +11,6 @@ export default class SearchCom extends Component {
     this.state = {
       books: [],
       searchTerm: "",
-      title: "",
-      authors: "",
-      description: "",
-      image: "",
-      link: ""
     }
   }
 
@@ -40,7 +35,6 @@ export default class SearchCom extends Component {
 
          data.data.items.map( item => {
           theseBooks.push({
-            key: item.volumeInfo.title,
             title: item.volumeInfo.title,
             authors: item.volumeInfo.authors,
             description: item.volumeInfo.description,
@@ -73,7 +67,7 @@ export default class SearchCom extends Component {
           { this.state.books.map( book => {
             return(
               <BookCard 
-                key={book.key}
+                key={book.title}
                 title={book.title} 
                 authors={book.authors} 
                 image={book.image}

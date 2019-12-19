@@ -3,7 +3,7 @@ import API from "../utils/API";
 import { Container } from "react-bootstrap";
 import Jumbo from "../components/Jumbo";
 import Header from "../components/Nav";
-import BookCard from "../components/bookCard";
+import MongoCard from "../components/mongoCard";
 
 export default class Mybooks extends Component {
 
@@ -21,7 +21,16 @@ export default class Mybooks extends Component {
       .catch( err => console.log(err))
   }
 
-  // 2. X button to delete book from DB => API.deleteBook()
+  deleteBook = id => {
+
+    API.deleteBook(id)
+      .then( res => {
+        console.log("book deleted")
+        this.loadBooks()
+      })
+      .catch( err => console.log(err));
+  }
+
 
   render() {
     return(
@@ -32,13 +41,15 @@ export default class Mybooks extends Component {
           {console.log(this.state.books)}
           { this.state.books.map( book => {
             return(
-              <BookCard 
-                key={book.key}
+              <MongoCard 
+                id={book._id}
+                key={book._id}
                 title={book.title} 
                 authors={book.authors} 
                 image={book.image}
                 description={book.description}
                 link={book.link}
+                deleteBook={this.deleteBook}
               />
               )
             })}
